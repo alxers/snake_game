@@ -11,6 +11,37 @@
     var canvasWidth = canvas.width;
     var canvasHeight = canvas.height;
 
+    var blockSize = 10;
+    var widthInBlocks = width / blockSize;
+    var heightInBlocks = height / blockSize;
+
+    var score = 0;
+
+    var drawBorder = function() {
+      ctx.fillStyle = 'Gray';
+      ctx.fillRect(0, 0, width, blockSize);
+      ctx.fillRect(0, height - blockSize, width, blockSize);
+      ctx.fillRect(0, 0, blockSize, height);
+      ctx.fillRect(width - blockSize, 0, blockSize, height);
+    };
+
+    var drawScore = function () {
+      ctx.font = '20px Courier';
+      ctx.fillStyle = 'Black';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      ctx.fillText('Score: ' + score, blockSize, blockSize);
+    };
+
+    var gameOver = function () {
+      clearInterval(intervalId);
+      ctx.font = '60px Courier';
+      ctx.fillStyle = 'Black';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('Game Over', width / 2, height / 2);
+    };
+
     var intervalId = setInterval(function() {
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
       drawScore();
@@ -20,99 +51,6 @@
       drawBorder();
     }, 100);
 
-    // var addCircle = function(x, y, radius, fillCircle) {
-    //   ctx.beginPath();
-    //   ctx.arc(x, y, radius, 0, Math.PI * 2, false);
-    //   if (fillCircle) {
-    //     ctx.fill();
-    //   } else {
-    //     ctx.stroke();
-    //   }
-    // };
-    //
-    // var Ball = function() {
-    //   this.x = canvasWidth / 2;
-    //   this.y = canvasHeight / 2;
-    //   this.speed = 5;
-    //   this.xSpeed = 5;
-    //   this.ySpeed = 0;
-    // };
-    //
-    // Ball.prototype.move = function() {
-    //   this.x += this.xSpeed;
-    //   this.y += this.ySpeed;
-
-      // if (this.x < 0) {
-      //   this.x = canvasWidth;
-      // } else if (this.x > canvasWidth) {
-      //   this.x = 0;
-      // }
-      //
-      // if (this.y < 0) {
-      //   this.y = canvasHeight;
-      // } else if (this.y > canvasHeight) {
-      //   this.y = 0;
-      // }
-
-    //   if (this.x > canvasWidth || this.x < 0) {
-    //     this.xSpeed = - this.xSpeed;
-    //   }
-    //
-    //   if (this.y > canvasHeight || this.y < 0) {
-    //     this.ySpeed = - this.ySpeed;
-    //   }
-    // };
-    //
-    // Ball.prototype.draw = function() {
-    //   addCircle(this.x, this.y, 10, true);
-    // };
-    //
-    // Ball.prototype.setDirection = function(direction) {
-    //   if (direction === 'up') {
-    //     this.xSpeed = 0;
-    //     this.ySpeed = -5;
-    //   } else if (direction === 'down') {
-    //     this.xSpeed = 0;
-    //     this.ySpeed = 5;
-    //   } else if (direction === 'left') {
-    //     this.xSpeed = -5;
-    //     this.ySpeed = 0;
-    //   } else if (direction === 'right') {
-    //     this.xSpeed = 5;
-    //     this.ySpeed = 0;
-    //   } else if (direction === 'stop') {
-    //     this.xSpeed = 0;
-    //     this.ySpeed = 0;
-    //   }
-    // };
-    //
-    // var keyNames = {
-    //   32: 'stop',
-    //   37: 'left',
-    //   38: 'up',
-    //   39: 'right',
-    //   40: 'down',
-    //   16: 'shift',
-    //   13: 'enter',
-    //   18: 'alt'
-    // };
-    //
-    // var ball = new Ball();
-    //
-    // document.addEventListener('keydown', function(e) {
-    //   // console.log(keyNames[e.keyCode], e.keyCode);
-    //   var direction = keyNames[e.keyCode];
-    //   ball.setDirection(direction);
-    // });
-    //
-    // setInterval(function() {
-    //   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    //
-    //   ball.draw();
-    //   ball.move();
-    //
-    //   ctx.strokeRect(0, 0, canvasWidth, canvasHeight);
-    // }, 30);
   </script>
 </body>
 </html>
