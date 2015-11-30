@@ -195,12 +195,18 @@
 
   // Run main game loop
   // TODO: add game speed
-  var intervalId = setInterval(function() {
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    drawScore();
-    snake.move();
-    snake.draw();
-    apple.draw();
-    drawBorder();
-  }, 100);
+  var animationTime = 100;
+  var gameLoop = function() {
+
+  };
+
+  gameLoop();
+  // var intervalId = setInterval(function() {
+  //   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+  //   drawScore();
+  //   snake.move();
+  //   snake.draw();
+  //   apple.draw();
+  //   drawBorder();
+  // }, 100);
 })()
