@@ -12,6 +12,9 @@
 
   var score = 0;
 
+  var animationTime = 130;
+  var animationStep = 2;
+
   var SNAKE_COLOR = 'Blue';
   var APPLE_COLOR = 'Green';
 
@@ -31,13 +34,14 @@
     ctx.fillText('Score: ' + score, blockSize, blockSize);
   };
 
+  // TODO: fix game over state (currently it allows to continue the game)
   var gameOver = function() {
-    clearInterval(intervalId);
     ctx.font = '60px Courier';
     ctx.fillStyle = 'Black';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText('Game Over', canvasWidth / 2, canvasHeight / 2);
+    clearTimeout(timeoutId);
   };
 
   // Helper function
@@ -119,6 +123,7 @@
 
     if (newHead.equal(apple.position)) {
       score++;
+      animationTime -= animationStep;
       apple.move();
     } else {
       this.segments.pop();
@@ -194,13 +199,21 @@
   var apple = new Apple();
 
   // Run main game loop
-  // TODO: add game speed
-  var animationTime = 100;
+  var timeoutId;
   var gameLoop = function() {
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    drawScore();
+    snake.move();
+    snake.draw();
+    apple.draw();
+    drawBorder();
 
+    timeoutId = setTimeout(gameLoop, animationTime);
   };
 
   gameLoop();
+
+
   // var intervalId = setInterval(function() {
   //   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   //   drawScore();
